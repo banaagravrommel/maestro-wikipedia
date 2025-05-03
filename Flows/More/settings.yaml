@@ -1,0 +1,40 @@
+appId: "org.wikipedia.alpha"
+
+---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    id: "org.wikipedia.alpha:id/nav_tab_more"
+- tapOn:
+    id: "org.wikipedia.alpha:id/main_drawer_settings_container"
+- assertVisible: "Settings"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/recycler_view"
+- assertVisible:
+    id: "android:id/title"
+    index: 0
+- assertVisible:
+    id: "android:id/title"
+    index: 6
+- assertVisible:
+    id: "android:id/title"
+    index: 9
+
+- scrollUntilVisible:
+    element:
+      text: "About"
+    direction: Down
+
+- assertVisible:
+    id: "android:id/title"
+    index: 2
+- assertVisible:
+    id: "android:id/title"
+    index: 8
+- assertVisible:
+    id: "org.wikipedia.alpha:id/action_bar"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/accountVanishButton"
+- tapOn: "Navigate up"
+

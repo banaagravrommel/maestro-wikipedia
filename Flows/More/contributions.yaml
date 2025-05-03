@@ -1,0 +1,21 @@
+appId: "org.wikipedia.alpha"
+
+---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    id: "org.wikipedia.alpha:id/nav_tab_more"
+- tapOn:
+    id: "org.wikipedia.alpha:id/main_drawer_contribs_container"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/userNameView"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/editCountsView"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/search_container"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/search_empty_text"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/search_empty_container"
+- tapOn: "Navigate up"

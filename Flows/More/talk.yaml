@@ -1,0 +1,22 @@
+appId: "org.wikipedia.alpha"
+
+---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    id: "org.wikipedia.alpha:id/nav_tab_more"
+- tapOn:
+    id: "org.wikipedia.alpha:id/main_drawer_talk_container"
+- assertVisible: "User talk: Ravqa"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/menu_notifications"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/menu_notifications_group"
+- assertVisible: "The conversation starts here"
+- assertVisible: "Talk pages are where people discuss how to make Wikipedia content\
+    \ the best it can be. Start by adding a new discussion topic to connect and collaborate\
+    \ with a community of Wikipedians."
+- assertVisible:
+    id: "org.wikipedia.alpha:id/talkNewTopicButton"
+- tapOn: "Navigate up"

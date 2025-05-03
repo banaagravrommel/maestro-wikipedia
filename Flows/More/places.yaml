@@ -1,0 +1,20 @@
+appId: "org.wikipedia.alpha"
+
+---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    id: "org.wikipedia.alpha:id/nav_tab_more"
+- tapOn:
+    id: "org.wikipedia.alpha:id/main_drawer_places_container"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/searchTextView"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/langCodeButton"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/controlsContainer"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/myLocationButton"
+- tapOn:
+    id: "org.wikipedia.alpha:id/backButton"

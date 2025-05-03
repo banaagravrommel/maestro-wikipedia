@@ -1,0 +1,26 @@
+appId: "org.wikipedia.alpha"
+
+---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    id: "org.wikipedia.alpha:id/nav_tab_more"
+- tapOn:
+    id: "org.wikipedia.alpha:id/main_drawer_watchlist_container"
+- assertVisible: "Watchlist"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/menu_notifications"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/search_container"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/dateText"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/titleText"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/timeText"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/summaryText"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/userNameText"
+- tapOn: "Navigate up"

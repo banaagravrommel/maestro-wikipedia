@@ -1,0 +1,35 @@
+appId: "org.wikipedia.alpha"
+
+---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    id: "org.wikipedia.alpha:id/menu_notifications"
+- assertVisible: "Notifications"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/menu_notifications_group"
+- assertVisible: "All (2)"
+- assertVisible: "Mentions (1)"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/search_container"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/notificationTitle"
+    index: 0
+- assertVisible:
+    id: "org.wikipedia.alpha:id/notificationSubtitle"
+    index: 0
+- assertVisible:
+    id: "org.wikipedia.alpha:id/notificationSource"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/notificationTime"
+    index: 0
+- assertVisible:
+    id: "org.wikipedia.alpha:id/notificationOverflowMenu"
+    index: 0
+- assertVisible:
+    id: "org.wikipedia.alpha:id/notificationItemImage"
+    index: 0
+- assertVisible:
+    id: "org.wikipedia.alpha:id/notifications_recycler_view"
+- tapOn: "Navigate up"

@@ -1,0 +1,19 @@
+appId: "org.wikipedia.alpha"
+
+---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    id: "org.wikipedia.alpha:id/nav_tab_more"
+- tapOn:
+    id: "org.wikipedia.alpha:id/main_drawer_donate_container"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/gPayTitle"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/gPayDescription"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/donateGooglePayButton"
+- assertVisible:
+    id: "org.wikipedia.alpha:id/donateOtherButton"
+- tapOn: CENTER # Tap to dismiss an initial overlay, perhaps

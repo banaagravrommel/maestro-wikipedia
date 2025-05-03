@@ -1,0 +1,58 @@
+appId: "org.wikipedia.alpha"  # Replace with the actual package ID of your app
+
+---
+- stopApp: org.wikipedia.alpha # Ensuring the app is stopped before launching
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    text: "More"
+- tapOn:
+    text: "Log in / join Wikipedia"
+
+- tapOn:
+    text: "Log in"
+
+- tapOn:
+    text: "Username"
+- inputText: "ravqa"
+
+- tapOn:
+    text: "Password"
+- inputText: "Test0987!"
+
+- tapOn:
+    below: "Password"
+    text: "Log in"
+
+- tapOn:
+    below: "Saved"
+    text: "Saved"
+
+- tapOn:
+    below: "Saved"
+    text: "Tester"
+
+- assertVisible: "Tester"
+
+- tapOn:
+    text: "Explore"
+- tapOn:
+    text: "Search Wikipedia"
+- inputText: "Lebron James"
+
+- tapOn:
+    below: "Lebron James"
+    text: "Lebron James"
+
+- tapOn:
+    text: "Save"
+
+- swipe:
+    start: "0%,50%"  # Start at the left edge, middle of the screen vertically
+    end: "30%,50%"    # End a bit into the screen, still in the middle vertically
+    duration: 300     # Optional: duration of the swipe in milliseconds
+
+- swipe:
+    start: "0%,50%"  # Start at the left edge, middle of the screen vertically
+    end: "30%,50%"    # End a bit into the screen, still in the middle vertically
+    duration: 300     # Optional: duration of the swipe in milliseconds

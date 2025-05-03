@@ -1,0 +1,59 @@
+appId: "org.wikipedia.alpha"  # Replace with the actual package ID of your app
+
+---
+- stopApp: org.wikipedia.alpha # Ensuring the app is stopped before launching
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    text: "More"
+- tapOn:
+    text: "Log in / join Wikipedia"
+
+- tapOn:
+    text: "Username"
+- evalScript:
+    text: |
+      var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      var result = '';
+      var charactersLength = characters.length;
+      var length = Math.floor(Math.random() * 10) + 5;
+
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+
+      return result + "@example.com";
+- inputText: "${output.result}"
+
+
+
+
+- tapOn:
+    text: "Password"
+- inputText: "Test0987!"
+
+- tapOn:
+    text: "Repeat password"
+- inputText: "Test0987!"
+
+- tapOn:
+    text: "Email (Optional)"
+- evalScript:
+    text: |
+      function generateRandomString(length) {
+        const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+      }
+      
+      var randomLength = Math.floor(Math.random() * 10) + 5; // Random length between 5 and 14 characters for the prefix
+      var randomPrefix = generateRandomString(randomLength);
+      vars.randomEmail = randomPrefix + "@example.com";
+- inputText: "${vars.randomEmail}"
+
+- tapOn:
+    text: "Next"
