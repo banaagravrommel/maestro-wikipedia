@@ -28,3 +28,9 @@ appId: "org.wikipedia.alpha"
 - tapOn:
         below: "Password"
         text: "Log in"
+- tapOn:
+          text: "More"
+- assertVisible:
+          text: "ravqa"
+- tapOn:
+          point: "50,50"

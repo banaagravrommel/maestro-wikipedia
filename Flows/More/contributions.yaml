@@ -1,21 +1,45 @@
-appId: "org.wikipedia.alpha"
+appId: "org.wikipedia.alpha"  # Replace with the actual package ID of your app
 
 ---
-- stopApp: org.wikipedia.alpha
+- stopApp: org.wikipedia.alpha # Ensuring the app is stopped before launching
 - launchApp: org.wikipedia.alpha
 
+# --- Step 1: Login if prompted ---
 - tapOn:
-    id: "org.wikipedia.alpha:id/nav_tab_more"
+      text: "More"
+
+- runFlow:
+      when:
+          visible: "Log in / join Wikipedia"
+      file: C:\Users\Rav\Documents\maestro\Wikipedia\Flows\Main\sign_in.yaml
+
+# Tap off modal if needed (dismiss any overlay)
 - tapOn:
-    id: "org.wikipedia.alpha:id/main_drawer_contribs_container"
+      point: "50,50"
+
+# --- Step 2: Navigate to Contributions ---
+- tapOn:
+      id: "org.wikipedia.alpha:id/nav_tab_more"
+
+- tapOn:
+      id: "org.wikipedia.alpha:id/main_drawer_contribs_container"
+
+# --- Step 3: Assert Contributions screen elements ---
 - assertVisible:
-    id: "org.wikipedia.alpha:id/userNameView"
+      id: "org.wikipedia.alpha:id/userNameView"
+
 - assertVisible:
-    id: "org.wikipedia.alpha:id/editCountsView"
+      id: "org.wikipedia.alpha:id/editCountsView"
+
 - assertVisible:
-    id: "org.wikipedia.alpha:id/search_container"
+      id: "org.wikipedia.alpha:id/search_container"
+
 - assertVisible:
-    id: "org.wikipedia.alpha:id/search_empty_text"
+      id: "org.wikipedia.alpha:id/search_empty_container"
+
 - assertVisible:
-    id: "org.wikipedia.alpha:id/search_empty_container"
-- tapOn: "Navigate up"
+      id: "org.wikipedia.alpha:id/search_empty_text"
+
+# --- Step 4: Return to previous screen ---
+- tapOn:
+      text: "Navigate up"

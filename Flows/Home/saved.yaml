@@ -1,58 +1,65 @@
-appId: "org.wikipedia.alpha"  # Replace with the actual package ID of your app
+appId: "org.wikipedia.alpha"
 
 ---
-- stopApp: org.wikipedia.alpha # Ensuring the app is stopped before launching
+
+# --- Setup: Ensure app starts in a clean state ---
+- stopApp: org.wikipedia.alpha
 - launchApp: org.wikipedia.alpha
 
+# --- Step 1: Navigate to Login ---
 - tapOn:
-    text: "More"
-- tapOn:
-    text: "Log in / join Wikipedia"
+   text: "More"
+
+- runFlow:
+   when:
+    visible: "Log in / join Wikipedia"
+   file: C:\Users\Rav\Documents\maestro\Wikipedia\Flows\Main\sign_in.yaml
 
 - tapOn:
-    text: "Log in"
+   point: "50,50"
+# --- Step 2: Search and Save an Article ---
+- tapOn:
+   id: "org.wikipedia.alpha:id/search_container"
+
+- inputText: "Kobe Bryant"
+
+- assertVisible:
+   text: "Kobe Bryant"
+   index: 1
 
 - tapOn:
-    text: "Username"
-- inputText: "ravqa"
+   text: "Kobe Bryant"
+   index: 1
 
 - tapOn:
-    text: "Password"
-- inputText: "Test0987!"
+   id: "org.wikipedia.alpha:id/page_save" # Save article
+
+# --- Step 3: Navigate back to home ---
+- pressKey: back
+- pressKey: back
+- pressKey: back
+
+# --- Step 4: Verify Article in Reading List ---
+- tapOn:
+   id: "org.wikipedia.alpha:id/nav_tab_reading_lists"
 
 - tapOn:
-    below: "Password"
-    text: "Log in"
+   id: "org.wikipedia.alpha:id/item_title_container"
+
+- assertVisible:
+   text: "Kobe Bryant"
 
 - tapOn:
-    below: "Saved"
-    text: "Saved"
+   text: "Kobe Bryant"
+
+# --- Step 5: Remove Article from Saved and Verify ---
+- tapOn:
+   id: "org.wikipedia.alpha:id/page_save"
 
 - tapOn:
-    below: "Saved"
-    text: "Tester"
+   text: "Remove from Saved"
 
-- assertVisible: "Tester"
+- pressKey: back
 
-- tapOn:
-    text: "Explore"
-- tapOn:
-    text: "Search Wikipedia"
-- inputText: "Lebron James"
-
-- tapOn:
-    below: "Lebron James"
-    text: "Lebron James"
-
-- tapOn:
-    text: "Save"
-
-- swipe:
-    start: "0%,50%"  # Start at the left edge, middle of the screen vertically
-    end: "30%,50%"    # End a bit into the screen, still in the middle vertically
-    duration: 300     # Optional: duration of the swipe in milliseconds
-
-- swipe:
-    start: "0%,50%"  # Start at the left edge, middle of the screen vertically
-    end: "30%,50%"    # End a bit into the screen, still in the middle vertically
-    duration: 300     # Optional: duration of the swipe in milliseconds
+- assertNotVisible:
+   text: "Kobe Bryant"
