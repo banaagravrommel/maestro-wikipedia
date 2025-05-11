@@ -1,0 +1,76 @@
+appId: "org.wikipedia.alpha"
+
+---
+
+# --- Setup: Clean app state ---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+# --- Step 1: Login if prompted ---
+- tapOn:
+      text: "More"
+
+- runFlow:
+      when:
+          visible: "Log in / join Wikipedia"
+      file: C:\Users\Rav\Documents\maestro\Wikipedia\Flows\Main\sign_in.yaml
+
+# Optional: Tap off any modal or overlay
+- tapOn:
+      point: "50,50"
+
+# --- Step 2: Navigate to Settings ---
+- tapOn:
+      id: "org.wikipedia.alpha:id/nav_tab_more"
+
+- tapOn:
+      id: "org.wikipedia.alpha:id/main_drawer_settings_container"
+
+# --- Step 3: Validate UI elements on Settings screen ---
+- assertVisible:
+      text: "Settings"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/recycler_view"
+
+- assertVisible:
+      id: "android:id/title"
+      index: 0
+
+- assertVisible:
+      id: "android:id/title"
+      index: 6
+
+- assertVisible:
+      id: "android:id/title"
+      index: 9
+
+# --- Step 4: Scroll to 'About' and validate ---
+- scrollUntilVisible:
+      element:
+          text: "About"
+      direction: Down
+
+- assertVisible:
+      id: "android:id/title"
+      index: 2
+
+- assertVisible:
+      id: "android:id/title"
+      index: 8
+
+# --- Step 5: Validate action bar and account settings ---
+- assertVisible:
+      id: "org.wikipedia.alpha:id/action_bar"
+
+- scrollUntilVisible:
+      element:
+          text: "Vanish account"
+      direction: Down
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/accountVanishButton"
+
+# --- Step 6: Navigate back ---
+- tapOn:
+      text: "Navigate up"

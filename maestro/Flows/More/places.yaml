@@ -1,0 +1,44 @@
+appId: "org.wikipedia.alpha"
+
+---
+
+# --- Setup: Ensure app starts from a clean state ---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+# --- Step 1: Login if prompted ---
+- tapOn:
+      text: "More"
+
+- runFlow:
+      when:
+          visible: "Log in / join Wikipedia"
+      file: C:\Users\Rav\Documents\maestro\Wikipedia\Flows\Main\sign_in.yaml
+
+# Optional: Tap off any lingering overlay/modals
+- tapOn:
+      point: "50,50"
+
+# --- Step 2: Navigate to Places ---
+- tapOn:
+      id: "org.wikipedia.alpha:id/nav_tab_more"
+
+- tapOn:
+      id: "org.wikipedia.alpha:id/main_drawer_places_container"
+
+# --- Step 3: Validate UI Elements on Places screen ---
+- assertVisible:
+      id: "org.wikipedia.alpha:id/searchTextView"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/langCodeButton"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/controlsContainer"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/myLocationButton"
+
+# --- Step 4: Exit Places screen ---
+- tapOn:
+      id: "org.wikipedia.alpha:id/backButton"

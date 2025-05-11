@@ -1,0 +1,28 @@
+appId: "org.wikipedia.alpha"  # Replace with the actual package ID of your app
+
+---
+- stopApp: org.wikipedia.alpha # Ensuring the app is stopped before launching
+- launchApp: org.wikipedia.alpha
+
+- tapOn:
+    text: "More"
+- tapOn:
+    text: "Log in / join Wikipedia"
+
+- tapOn:
+    text: "Username"
+- inputRandomPersonName
+-  inputRandomNumber
+- tapOn:
+    text: "Password"
+- inputText: "Test0987!"
+
+- tapOn:
+    text: "Repeat password"
+- inputText: "Test0987!"
+
+- tapOn:
+    text: "Email (Optional)"
+- inputRandomEmail
+- tapOn:
+    text: "Next"

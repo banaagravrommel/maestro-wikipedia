@@ -1,0 +1,65 @@
+appId: "org.wikipedia.alpha"
+
+---
+
+# --- Setup: Ensure app starts in a clean state ---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+# --- Step 1: Navigate to Login ---
+- tapOn:
+   text: "More"
+
+- runFlow:
+   when:
+    visible: "Log in / join Wikipedia"
+   file: C:\Users\Rav\Documents\maestro\Wikipedia\Flows\Main\sign_in.yaml
+
+- tapOn:
+   point: "50,50"
+# --- Step 2: Search and Save an Article ---
+- tapOn:
+   id: "org.wikipedia.alpha:id/search_container"
+
+- inputText: "Kobe Bryant"
+
+- assertVisible:
+   text: "Kobe Bryant"
+   index: 1
+
+- tapOn:
+   text: "Kobe Bryant"
+   index: 1
+
+- tapOn:
+   id: "org.wikipedia.alpha:id/page_save" # Save article
+
+# --- Step 3: Navigate back to home ---
+- pressKey: back
+- pressKey: back
+- pressKey: back
+
+# --- Step 4: Verify Article in Reading List ---
+- tapOn:
+   id: "org.wikipedia.alpha:id/nav_tab_reading_lists"
+
+- tapOn:
+   id: "org.wikipedia.alpha:id/item_title_container"
+
+- assertVisible:
+   text: "Kobe Bryant"
+
+- tapOn:
+   text: "Kobe Bryant"
+
+# --- Step 5: Remove Article from Saved and Verify ---
+- tapOn:
+   id: "org.wikipedia.alpha:id/page_save"
+
+- tapOn:
+   text: "Remove from Saved"
+
+- pressKey: back
+
+- assertNotVisible:
+   text: "Kobe Bryant"

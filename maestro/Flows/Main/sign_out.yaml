@@ -1,0 +1,37 @@
+appId: "org.wikipedia.alpha"  # Replace with the actual package ID of your app
+
+---
+- stopApp: org.wikipedia.alpha # Ensuring the app is stopped before launching
+- launchApp: org.wikipedia.alpha
+
+
+- tapOn:
+    text: "More"
+
+- runFlow:
+      when:
+          visible: 'Log in / join Wikipedia'
+      file: sign_in.yaml
+
+- tapOn:
+    text: "Settings"
+
+- scrollUntilVisible:
+    element:
+      text: "Log out"
+    direction: Down
+
+- tapOn:
+    text: "Log out"
+
+- runFlow:
+      when:
+          visible: 'Log out'
+      commands:
+          - tapOn: 'Log out'
+
+- tapOn:
+      text: "More"
+- assertVisible:
+      text: "Log in / join Wikipedia"
+

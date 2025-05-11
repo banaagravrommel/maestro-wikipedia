@@ -1,0 +1,44 @@
+appId: "org.wikipedia.alpha"
+
+---
+
+# --- Setup: Ensure clean app state ---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+# --- Step 1: Login if prompted ---
+- tapOn:
+      text: "More"
+
+- runFlow:
+      when:
+          visible: "Log in / join Wikipedia"
+      file: C:\Users\Rav\Documents\maestro\Wikipedia\Flows\Main\sign_in.yaml
+
+# Optional: Tap off any modal/overlay after login
+- tapOn:
+      point: "50,50"
+
+# --- Step 2: Navigate to Donate screen ---
+- tapOn:
+      id: "org.wikipedia.alpha:id/nav_tab_more"
+
+- tapOn:
+      id: "org.wikipedia.alpha:id/main_drawer_donate_container"
+
+# --- Step 3: Assert Donate screen elements ---
+- assertVisible:
+      id: "org.wikipedia.alpha:id/gPayTitle"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/gPayDescription"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/donateGooglePayButton"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/donateOtherButton"
+
+# --- Step 4: Tap to dismiss overlay if any ---
+- tapOn:
+      point: "50,50"

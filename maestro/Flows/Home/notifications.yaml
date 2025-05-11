@@ -1,0 +1,62 @@
+appId: "org.wikipedia.alpha"
+
+---
+
+# --- Setup: Ensure a clean app state ---
+- stopApp: org.wikipedia.alpha
+- launchApp: org.wikipedia.alpha
+
+# --- Step 1: Navigate to Login ---
+- tapOn:
+      text: "More"
+- runFlow:
+      when:
+          visible: "Log in / join Wikipedia"
+      file: C:\Users\Rav\Documents\maestro\Wikipedia\Flows\Main\sign_in.yaml
+- tapOn:
+      point: "50,50"
+# --- Step 2: Open Notifications ---
+- tapOn:
+      id: "org.wikipedia.alpha:id/menu_notifications"
+
+# --- Step 3: Verify Notifications UI Elements ---
+- assertVisible:
+      text: "Notifications"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/menu_notifications_group"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/search_container"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/notifications_recycler_view"
+
+# --- Step 4: Verify First Notification Entry ---
+- assertVisible:
+      id: "org.wikipedia.alpha:id/notificationTitle"
+      index: 0
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/notificationSubtitle"
+      index: 0
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/notificationSource"
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/notificationTime"
+      index: 0
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/notificationOverflowMenu"
+      index: 0
+
+- assertVisible:
+      id: "org.wikipedia.alpha:id/notificationItemImage"
+      index: 0
+
+# --- Step 5: Return to Previous Screen ---
+- tapOn:
+      text: "Navigate up"
+
