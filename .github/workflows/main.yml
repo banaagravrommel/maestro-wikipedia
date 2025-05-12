@@ -31,13 +31,29 @@ jobs:
       - name: Verify Maestro Installation
         run: maestro --version
 
-      - name: Launch Emulator and Run Maestro Tests
+      - name: Launch Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           target: google_apis
           arch: x86_64
           profile: pixel_3a
-          script: |
-            adb install android_app/Wikipedia_Alpha.apk
-            maestro test maestro
+          emulator-options: "-no-snapshot -no-window"
+
+      - name: Wait for Emulator to Boot
+        run: |
+          adb wait-for-device
+          adb shell getprop sys.boot_completed
+
+      - name: Debug ADB Connection
+        run: adb devices
+
+      - name: Restart ADB (if needed)
+        run: |
+          adb kill-server
+          adb start-server
+
+      - name: Install App and Run Maestro Tests
+        run: |
+          adb install android_app/Wikipedia_Alpha.apk
+          maestro test maestro
