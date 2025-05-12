@@ -8,10 +8,10 @@ on:
 
 jobs:
   maestro-test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     env:
-      ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL: 600
+      ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL: 900
 
     steps:
       - name: Checkout Repository
@@ -37,11 +37,11 @@ jobs:
       - name: Launch Emulator and Run Maestro Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 28
+          api-level: 26
           target: google_apis
           arch: x86_64
           profile: nexus_5
-          emulator-options: "-no-snapshot -no-window -gpu swiftshader_indirect"
+          emulator-options: "-no-snapshot -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim"
           script: |
             adb wait-for-device
             adb shell getprop sys.boot_completed
