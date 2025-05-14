@@ -34,26 +34,21 @@ jobs:
       - name: Verify Maestro Installation
         run: maestro --version || echo "Warning: Maestro installation check failed"
 
-      - name: Launch Emulator and Run Maestro Tests
+      - name: Launch Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 26
           target: google_apis
           arch: x86_64
           profile: nexus_5
-          emulator-options: |
-            -no-snapshot
-            -no-window
-            -gpu swiftshader_indirect
-            -no-audio
-            -no-boot-anim
-          script: |
-            adb wait-for-device || echo "ADB device wait failed"
-            adb shell getprop sys.boot_completed || echo "Boot check failed"
-            adb devices || echo "ADB device check failed"
-            adb install android_app/Wikipedia_Alpha.apk || echo "APK installation failed"
-            maestro test maestro || echo "Maestro test execution failed"
+          emulator-options: "-no-snapshot -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim"
 
-      - name: Debug Emulator Boot
+      - name: Wait for Emulator and Install APK
         run: |
-          adb shell getprop sys.boot_completed || echo "Emulator boot failed"
+          adb wait-for-device || echo "ADB device wait failed"
+          adb shell getprop sys.boot_completed || echo "Boot check failed"
+          adb devices || echo "ADB device check failed"
+          adb install android_app/Wikipedia_Alpha.apk || echo "APK installation failed"
+
+      - name: Run Maestro Tests
+        run: maestro
