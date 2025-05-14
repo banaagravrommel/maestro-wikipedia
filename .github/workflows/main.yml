@@ -50,4 +50,5 @@ jobs:
             maestro test maestro || echo "Maestro test execution failed"
 
       - name: Debug Emulator Boot
-        run: adb shell getprop sys.boot_completed || echo "Emulator boot failed"
+        run: |
+          adb shell getprop sys.boot_completed || echo "Emulator boot failed"
