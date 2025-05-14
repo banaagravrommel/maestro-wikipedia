@@ -8,7 +8,7 @@ on:
 
 jobs:
   maestro-test:
-    runs-on: macos-latest  # Using macOS for better emulator performance
+    runs-on: macos-latest
 
     env:
       ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL: 900
@@ -42,7 +42,7 @@ jobs:
           arch: x86_64
           profile: nexus_5
           emulator-options: "-no-snapshot -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim"
-          script: |
+          script: |-
             adb wait-for-device || echo "ADB device wait failed"
             adb shell getprop sys.boot_completed || echo "Boot check failed"
             adb devices || echo "ADB device check failed"
