@@ -1,4 +1,4 @@
-name: Run Maestro Tests
+run: maestro test Flows
 
 on:
   push:
