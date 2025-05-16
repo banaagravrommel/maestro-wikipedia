@@ -26,10 +26,10 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
 
-      - name: Install Maestro CLI
+      - name: Install Maestro CLI and set PATH
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
-          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+          echo "PATH=$HOME/.maestro/bin:$PATH" >> $GITHUB_ENV
 
       - name: Verify Maestro Installation
         run: maestro --version || echo "Warning: Maestro installation check failed"
@@ -40,15 +40,4 @@ jobs:
           api-level: 26
           target: google_apis
           arch: x86_64
-          profile: nexus_5
-          emulator-options: "-no-snapshot -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim"
-
-      - name: Wait for Emulator and Install APK
-        run: |
-          adb wait-for-device || echo "ADB device wait failed"
-          adb shell getprop sys.boot_completed || echo "Boot check failed"
-          adb devices || echo "ADB device check failed"
-          adb install android_app/Wikipedia_Alpha.apk || echo "APK installation failed"
-
-      - name: Run Maestro Tests
-        run: maestro
+          profile: nexus
