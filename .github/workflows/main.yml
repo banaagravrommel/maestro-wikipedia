@@ -1,4 +1,4 @@
-run: maestro test Flows
+name: Run Maestro Tests
 
 on:
   push:
@@ -30,6 +30,7 @@ jobs:
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+
       - name: Verify Maestro Installation
         run: maestro --version || echo "Warning: Maestro installation check failed"
 
@@ -41,35 +42,33 @@ jobs:
           arch: x86_64
           profile: pixel_3a
           emulator-options: "-no-snapshot -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim"
-          emulator-startup-timeout: 600 # Example: 10 minutes
+          emulator-startup-timeout: 600
 
       - name: Wait for Emulator and Install APK
         run: |
-        adb wait-for-device
-        
-        boot_completed=""
-        while [ "$boot_completed" != "1" ]; do
-        sleep 5
-        boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
-        echo "Waiting for emulator to fully boot..."
-        done
-
-          sleep 5 # Small delay after boot
+          adb wait-for-device
+          boot_completed=""
+          while [ "$boot_completed" != "1" ]; do
+            sleep 5
+            boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
+            echo "Waiting for emulator to fully boot..."
+          done
+          sleep 5
           adb devices
-          adb install android_app/Wikipedia_Alpha.apk # Fail if installation fails
+          adb install android_app/Wikipedia_Alpha.apk
 
-        - name: Run Home Flows
-          run: maestro test Flows/Home
+      - name: Run Home Flows
+        run: maestro test Flows/Home
 
-        - name: Run Main Flows
-          run: maestro test Flows/Main
+      - name: Run Main Flows
+        run: maestro test Flows/Main
 
-        - name: Run More Flows
-          run: maestro test Flows/More
+      - name: Run More Flows
+        run: maestro test Flows/More
 
       - name: Upload Maestro Reports (if any)
         uses: actions/upload-artifact@v3
         with:
           name: maestro-reports
-          path: maestro-reports # Adjust this path if Maestro generates reports
+          path: maestro-reports
           if-no-files-found: ignore
