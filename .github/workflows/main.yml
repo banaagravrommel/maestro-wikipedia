@@ -40,4 +40,15 @@ jobs:
           api-level: 26
           target: google_apis
           arch: x86_64
-          profile: nexus
+          profile: Nexus 5
+          emulator-options: "-no-snapshot -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim"
+
+      - name: Wait for Emulator and Install APK
+        run: |
+          adb wait-for-device || echo "ADB device wait failed"
+          adb shell getprop sys.boot_completed || echo "Boot check failed"
+          adb devices || echo "ADB device check failed"
+          adb install android_app/Wikipedia_Alpha.apk || echo "APK installation failed"
+
+      - name: Run Maestro Tests
+        run: maestro
