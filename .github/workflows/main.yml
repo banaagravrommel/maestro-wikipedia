@@ -58,9 +58,14 @@ jobs:
           adb devices
           adb install android_app/Wikipedia_Alpha.apk # Fail if installation fails
 
-      - name: Run Maestro Tests
-       run: maestro test Flows
+        - name: Run Home Flows
+          run: maestro test Flows/Home
 
+        - name: Run Main Flows
+          run: maestro test Flows/Main
+
+        - name: Run More Flows
+          run: maestro test Flows/More
 
       - name: Upload Maestro Reports (if any)
         uses: actions/upload-artifact@v3
