@@ -45,14 +45,22 @@ jobs:
 
       - name: Wait for Emulator and Install APK
         run: |
-          adb wait-for-device -timeout 60 # Wait for 60 seconds
-          adb shell getprop sys.boot_completed || echo "Warning: Boot check failed"
+        adb wait-for-device
+        
+        boot_completed=""
+        while [ "$boot_completed" != "1" ]; do
+        sleep 5
+        boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
+        echo "Waiting for emulator to fully boot..."
+        done
+
           sleep 5 # Small delay after boot
           adb devices
           adb install android_app/Wikipedia_Alpha.apk # Fail if installation fails
 
       - name: Run Maestro Tests
-        run: maestro # Or maestro test your_test_directory or maestro test test1.yaml ...
+       run: maestro test Flows
+
 
       - name: Upload Maestro Reports (if any)
         uses: actions/upload-artifact@v3
