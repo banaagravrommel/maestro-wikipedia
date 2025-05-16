@@ -30,7 +30,6 @@ jobs:
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo 'PATH=$HOME/.maestro/bin:$PATH' >> $GITHUB_ENV
-
       - name: Verify Maestro Installation
         run: maestro --version || echo "Warning: Maestro installation check failed"
 
@@ -42,14 +41,22 @@ jobs:
           arch: x86_64
           profile: pixel_3a
           emulator-options: "-no-snapshot -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim"
-
+          emulator-startup-timeout: 600 # Example: 10 minutes
 
       - name: Wait for Emulator and Install APK
         run: |
-          adb wait-for-device || echo "ADB device wait failed"
-          adb shell getprop sys.boot_completed || echo "Boot check failed"
-          adb devices || echo "ADB device check failed"
-          adb install android_app/Wikipedia_Alpha.apk || echo "APK installation failed"
+          adb wait-for-device -timeout 60 # Wait for 60 seconds
+          adb shell getprop sys.boot_completed || echo "Warning: Boot check failed"
+          sleep 5 # Small delay after boot
+          adb devices
+          adb install android_app/Wikipedia_Alpha.apk # Fail if installation fails
 
       - name: Run Maestro Tests
-        run: maestro
+        run: maestro # Or maestro test your_test_directory or maestro test test1.yaml ...
+
+      - name: Upload Maestro Reports (if any)
+        uses: actions/upload-artifact@v3
+        with:
+          name: maestro-reports
+          path: maestro-reports # Adjust this path if Maestro generates reports
+          if-no-files-found: ignore
