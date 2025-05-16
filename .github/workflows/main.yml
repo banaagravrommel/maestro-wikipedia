@@ -29,11 +29,10 @@ jobs:
       - name: Install Maestro CLI and set PATH
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
-          echo "PATH=$HOME/.maestro/bin:$PATH" >> $GITHUB_ENV
+          echo 'PATH=$HOME/.maestro/bin:$PATH' >> $GITHUB_ENV
 
       - name: Verify Maestro Installation
         run: maestro --version || echo "Warning: Maestro installation check failed"
-
 
       - name: Launch Emulator
         uses: reactivecircus/android-emulator-runner@v2
