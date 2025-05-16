@@ -34,6 +34,7 @@ jobs:
       - name: Verify Maestro Installation
         run: maestro --version || echo "Warning: Maestro installation check failed"
 
+
       - name: Launch Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
