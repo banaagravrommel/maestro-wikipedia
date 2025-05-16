@@ -29,7 +29,7 @@ jobs:
       - name: Install Maestro CLI and set PATH
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
-          echo 'PATH=$HOME/.maestro/bin:$PATH' >> $GITHUB_ENV
+          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
       - name: Verify Maestro Installation
         run: maestro --version || echo "Warning: Maestro installation check failed"
 
