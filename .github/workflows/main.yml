@@ -27,4 +27,4 @@ jobs:
 
       - name: Run Maestro test
         run: |
-          maestro test Flows\Home\notifications.yaml       
+        maestro test Flows/Home/notifications.yaml
