@@ -25,11 +25,10 @@ jobs:
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> $GITHUB_PATH
 
-      - name: List files in the repo
+      - name: List files in the repo (debugging)
         run: |
           ls -R
 
       - name: Run Maestro test
         run: |
-        maestro test Flows/Home/notifications.yaml
-
+          maestro test Flows/Home/notifications.yaml
