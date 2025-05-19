@@ -2,15 +2,18 @@
 A comprehensive end-to-end mobile automation suite for the Wikipedia Android app using Maestro.
 This project tests core user flows including authentication, home navigation, article search, saved pages, and settings—ensuring quality and stability across the app.
 
-👤 Author
-👨‍💻 Software QA Engineer
+---
+
+## 👤 Author
+
+**👨‍💻 Software QA Engineer**  
 Passionate about building reliable, automated testing systems that ensure product quality and user experience.
 
-📧 Email: ravrommelbanaag@gmail.com
+- 📧 Email: ravrommelbanaag@gmail.com  
+- 🐱 GitHub: [banaagravrommel](https://github.com/banaagravrommel)  
+- 💼 Upwork: [Upwork](https://www.upwork.com/freelancers/~0123456789abcdef)
 
-🐱 GitHub: banaagravrommel
-
-💼 Upwork: Upwork
+---
 
 ✅ Features Tested
 🔐 Main Flows
