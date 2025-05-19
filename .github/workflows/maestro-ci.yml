@@ -1,0 +1,46 @@
+name: Maestro CI with Emulator
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  maestro-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Create AVD and start emulator
+        run: |
+          echo "y" | sdkmanager --install "system-images;android-30;google_apis;x86_64"
+          echo "no" | avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "pixel"
+          emulator -avd test -no-window -no-audio -no-boot-anim &
+          adb wait-for-device
+          adb shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+          adb shell input keyevent 82
+
+      - name: Install Maestro CLI
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+
+      - name: Debug: List all files
+        run: |
+          find . -type f
+
+      - name: Run Maestro test
+        run: |
+          maestro test maestro/Flows/Main/create_account.yaml
