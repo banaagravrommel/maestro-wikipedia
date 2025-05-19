@@ -23,13 +23,21 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Create AVD and start emulator
+      - name: Install system image and create emulator
         run: |
-          echo "y" | sdkmanager --install "system-images;android-30;google_apis;x86_64"
+          echo "y" | sdkmanager "platform-tools" "platforms;android-30" "emulator" "system-images;android-30;google_apis;x86_64"
           echo "no" | avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "pixel"
-          emulator -avd test -no-window -no-audio -no-boot-anim &
+
+      - name: Start Android emulator
+        run: |
+          nohup emulator -avd test -no-window -no-audio -no-boot-anim &
           adb wait-for-device
-          adb shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+          boot_completed=""
+          until [[ "$boot_completed" == "1" ]]; do
+            sleep 5
+            boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
+            echo "Waiting for emulator... boot_completed=$boot_completed"
+          done
           adb shell input keyevent 82
 
       - name: Install Maestro CLI
