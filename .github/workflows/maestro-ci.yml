@@ -30,7 +30,7 @@ jobs:
 
       - name: Start Android emulator
         run: |
-          nohup emulator -avd test -no-window -no-audio -no-boot-anim &
+          nohup emulator -avd test -no-audio -no-boot-anim -no-window &
           adb wait-for-device
           boot_completed=""
           until [[ "$boot_completed" == "1" ]]; do
@@ -45,10 +45,11 @@ jobs:
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> $GITHUB_PATH
 
+      - name: Add Maestro to PATH
+        run: echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+
       - name: Debug: List all files
-        run: |
-          find . -type f
+        run: find . -type f
 
       - name: Run Maestro test
-        run: |
-          maestro test maestro/Flows/Main/create_account.yaml
+        run: maestro test maestro/Flows/Main/create_account.yaml
