@@ -31,5 +31,5 @@ jobs:
 
       - name: Run Maestro test
         run: |
-          maestro test maestro/Flows/Home/notifications.yaml
+          maestro test maestro/Flows/Main/create_account.yaml
 
