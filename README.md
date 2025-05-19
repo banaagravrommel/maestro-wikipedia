@@ -1,113 +1,125 @@
-🧪 Maestro E2E Testing for Wikipedia Alpha App
-An end-to-end automation suite using Maestro to test the Wikipedia Alpha Android application. This project validates core user flows such as onboarding, search functionality, article navigation, and UI responsiveness. It leverages Maestro's declarative syntax for fast, readable, and maintainable mobile test automation.
-GitHub
+📱 Maestro E2E Testing for Wikipedia Android App
+A comprehensive end-to-end mobile automation suite for the Wikipedia Android app using Maestro.
+This project tests core user flows including authentication, home navigation, article search, saved pages, and settings—ensuring quality and stability across the app.
 
 👤 Author
 👨‍💻 Software QA Engineer
 Passionate about building reliable, automated testing systems that ensure product quality and user experience.
-Email: ravrommelbanaag@gmail.com
-GitHub: banaagravrommel
-Upwork: Upwork
+
+📧 Email: ravrommelbanaag@gmail.com
+
+🐱 GitHub: banaagravrommel
+
+💼 Upwork: Upwork
 
 ✅ Features Tested
-🚀 Onboarding Flow
+🔐 Main Flows
+Sign in
 
-Skip or complete onboarding steps
+Create account
 
-Language selection and confirmation
-GitHub
-+1
-Wikipedia
-+1
+Sign out
 
-🔍 Search Functionality
+🏠 Home Navigation
+Search articles
 
-Search for articles using keywords
+Edit article description
 
-Validate search results and navigation to articles
-Wikipedia
-+1
-Wikipedia
-+1
+Explore content
 
-📄 Article Navigation
+Access saved articles
 
-Scroll through article content
+View notifications
 
-Verify presence of images, links, and references
-Wikipedia
-+4
-Wikipedia
-+4
-Wikipedia
-+4
-GitHub Docs
+📂 More Menu
+Contributions
 
-🎨 UI Components
+Places
 
-Check visibility of toolbar, tabs, and menus
+Watchlist
 
-Validate theme changes and responsiveness
-Wikipedia
-+2
-Wikipedia
-+2
-Wikipedia
-+2
+Talk pages
 
-🔄 App Lifecycle
+Settings
 
-Background and foreground transitions
-
-Handle device rotations and state persistence
+Donation screen
 
 🧰 Tech Stack
-Maestro (latest version)
+Maestro – Mobile UI testing framework
 
-Android Emulator or real device
+YAML – Test flow definitions
 
-YAML for test flow definitions
+GitHub Actions – Optional CI integration
 
-GitHub Actions (for optional CI integration)
+Android Emulator or real device (for test execution)
 
 📁 Project Structure
 bash
 Copy
 Edit
 maestro-wikipedia/
-├── android-app/             # Wikipedia Alpha APK and related files
-├── maestro/                 # Maestro test flows
+│
+├── maestro/
 │   └── Flows/
-│       ├── onboarding.yaml
-│       ├── search.yaml
-│       ├── article_navigation.yaml
-│       └── ui_components.yaml
-├── test-results/            # Test execution logs and artifacts
+│       ├── Home/
+│       │   ├── edit.yaml
+│       │   ├── explore.yaml
+│       │   ├── notifications.yaml
+│       │   ├── saved.yaml
+│       │   ├── search.yaml
+│       │   └── test.yaml
+│       ├── Main/
+│       │   ├── create_account.yaml
+│       │   ├── sign_in.yaml
+│       │   └── sign_out.yaml
+│       └── More/
+│           ├── contributions.yaml
+│           ├── donate.yaml
+│           ├── places.yaml
+│           ├── settings.yaml
+│           ├── talk.yaml
+│           └── watchlist.yaml
+│
 ├── .github/
 │   └── workflows/
-│       └── maestro-ci.yml   # CI configuration
-├── .gitignore
-├── package.json             # Project metadata and dependencies
-└── README.md                # Project documentation
+│       ├── main.yml
+│       └── playwright.yml (Not used by Maestro)
+│
+├── package.json
+└── README.md
 🚀 Getting Started
 1. Install Maestro CLI
-Follow the official installation guide: https://maestro.mobile.dev/getting-started/
-
-2. Run Tests
 bash
 Copy
 Edit
-maestro test maestro/Flows/onboarding.yaml
-Repeat the command for other test flows as needed.
+brew install maestro
+Or manually via:
 
-3. View Test Results
-Test execution logs and artifacts are saved in the test-results/ directory.
+bash
+Copy
+Edit
+curl -Ls "https://get.maestro.mobile.dev" | bash
+2. Verify Installation
+bash
+Copy
+Edit
+maestro --version
+3. Run a Flow
+Make sure your emulator or physical device is running and then execute:
 
-⚠️ Important Notes
-Ensure that the Wikipedia Alpha app is installed on your emulator or device before running tests.
+bash
+Copy
+Edit
+maestro test maestro/Flows/Home/search.yaml
+You can replace search.yaml with any other flow file you'd like to test.
 
-Tests are designed for the Alpha version; compatibility with other versions is not guaranteed.
+⚠️ Notes
+This test suite targets the official Wikipedia Android app.
 
-🏁 Contributing
-Contributions are welcome! Feel free to fork the repository and submit pull requests for improvements or additional test flows.
+Ensure the app is installed on your emulator or device before running tests.
+
+Modify the flow files to match the app version or locale you're testing.
+
+🧩 Contributing
+Feel free to fork the repository and submit pull requests to improve test coverage or refactor flows.
 
